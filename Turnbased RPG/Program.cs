@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Design;
-using Turnbased_RPG;
+﻿using Turnbased_RPG;
 
 Console.WriteLine("Answer questions with 'yes' or 'no'. Exceptions are marked like 'this'");
 Console.WriteLine("Health:"+Player.Health+" Potions:"+Player.Potions+" Attack:"+Player.Damage+" Torches:"+Player.Torches);
@@ -8,8 +7,6 @@ Console.WriteLine();
 A1();
 void A1()
 {
-   
-    
     Console.WriteLine("You are an explorer in a distant land. You discover a mysterious cave. Do you enter?");
 
     var userInput = Console.ReadLine();
@@ -23,7 +20,6 @@ void A1()
         A1O2();
     }
 }
-
  void A1O2()
 {
     Console.WriteLine("You decide to leave. On your journey a fierce storm starts brewing.");
@@ -44,8 +40,6 @@ void A1()
             A1O2();
         }
     }
-
-
 void A2()
 {
     Console.Write("You enter the cave. It's terribly dark. Do you light a torch?");
@@ -60,7 +54,6 @@ void A2()
         Console.WriteLine("You decide to save your torch for the time being. You can still see in a short vicinity and barely make out a path to follow");
     }
 }
-
 void A3O1()
 {
     Console.WriteLine("You light a torch and can now see clearly, but the light has drawn the attention of some creature coming your way. Will you 'fight' or attempt to 'hide'");
@@ -72,6 +65,7 @@ void A3O1()
         FirstEncounter();
     }
 }
+
 static void FirstEncounter()
 {
     Console.WriteLine("Monster health: " + Monster.Health);
@@ -91,7 +85,6 @@ static void FirstEncounter()
         FirstEncounter();
     }
 }
-
 static void Attack()
 {
     Console.WriteLine("You attack the creature. It did: " + Player.Damage + " damage!");
@@ -99,7 +92,6 @@ static void Attack()
     Monster.Health--;
     Player.Health--;
 }
-
 static void Defend()
 {
     Console.WriteLine("You take a sip of your trusty canteen and evade an incoming blow!");
