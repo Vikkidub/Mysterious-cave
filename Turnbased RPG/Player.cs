@@ -11,5 +11,6 @@ namespace Turnbased_RPG
         public static int Health = 3;
         public static int Damage = 1;
         public static int Potions = 2;
+        public static int Torches = 1;
     }
 }

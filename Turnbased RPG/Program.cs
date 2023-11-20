@@ -1,14 +1,16 @@
-﻿using System.Collections.Specialized;
-using System.ComponentModel;
-using System.ComponentModel.Design;
-using Turnbased_RPG;
+﻿using Turnbased_RPG;
 
 var enemy = new Monster { };
+
+Console.WriteLine("Answer questions with 'yes' or 'no'. Exceptions are marked like 'this'");
+Console.WriteLine("Health:"+Player.Health+" Potions:"+Player.Potions+" Attack:"+Player.Damage+" Torches:"+Player.Torches);
+Console.WriteLine();
 
 A1();
 void A1()
 {
-    Console.WriteLine("Answer questions with 'yes' or 'no'. Exceptions are marked like 'this'");
+   
+    
     Console.WriteLine("You are an explorer in a distant land. You discover a mysterious cave. Do you enter?");
 
     var userInput = Console.ReadLine();
@@ -31,6 +33,7 @@ void A2()
     var userInput = Console.ReadLine();
     if (userInput == "yes")
     {
+        Player.Torches--;
         A3O1();
     }
     else
@@ -80,7 +83,10 @@ static void Attack()
 
 static void Defend()
 {
-    Console.WriteLine("You evaded an incoming blow");
+    Console.WriteLine("You take a sip of your trusty canteen and evade an incoming blow!");
+    Console.WriteLine("The monster is so suprised by the maneuver that it falls on its face");
+    Monster.Health--;
+    Player.Potions--;
 }
 
 
