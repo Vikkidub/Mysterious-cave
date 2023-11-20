@@ -1,4 +1,5 @@
-﻿using Turnbased_RPG;
+﻿using System.ComponentModel.Design;
+using Turnbased_RPG;
 
 Console.WriteLine("Answer questions with 'yes' or 'no'. Exceptions are marked like 'this'");
 Console.WriteLine("Health:"+Player.Health+" Potions:"+Player.Potions+" Attack:"+Player.Damage+" Torches:"+Player.Torches);
@@ -17,13 +18,33 @@ void A1()
     {
         A2();
     }
-    else
+    else 
     {
-        {
-            Console.WriteLine("You have a bad feeling about the cave and decide to leave. You still can't help but wonder what adventures could have been had. THE END");
-        }
+        A1O2();
     }
 }
+
+ void A1O2()
+{
+    Console.WriteLine("You decide to leave. On your journey a fierce storm starts brewing.");
+    Console.WriteLine("Take 'shelter' in the cave?" + " or try to make it through the 'storm'?");
+    var userInput = Console.ReadLine(); 
+
+    if (userInput == "yes" || userInput == "shelter" || userInput == "cave") 
+    {
+        A2();
+    }
+    else if (userInput == "no" || userInput == "storm")
+        {
+            Console.WriteLine("Unfortunately the storm was too owerpowering and you never made it back home. THE END");
+        }
+        else
+        {
+            Console.WriteLine("This is not the time for that!");
+            A1O2();
+        }
+    }
+
 
 void A2()
 {
