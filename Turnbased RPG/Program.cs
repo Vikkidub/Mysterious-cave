@@ -3,44 +3,41 @@ using System.ComponentModel;
 using System.ComponentModel.Design;
 using Turnbased_RPG;
 
-int health = 3;
-int damage = 1;
-int potions = 2;
-
-var enemy = new Monster {};
+var enemy = new Monster { };
 
 A1();
- void A1()
+void A1()
 {
     Console.WriteLine("Answer questions with 'yes' or 'no'. Exceptions are marked like 'this'");
     Console.WriteLine("You are an explorer in a distant land. You discover a mysterious cave. Do you enter?");
-    
+
     var userInput = Console.ReadLine();
 
     if (userInput == "yes")
     {
         A2();
     }
-     else {
+    else
+    {
         {
             Console.WriteLine("You have a bad feeling about the cave and decide to leave. You still can't help but wonder what adventures could have been had. THE END");
         }
     }
 }
 
-    void A2()
+void A2()
+{
+    Console.Write("You enter the cave. It's terribly dark. Do you light a torch?");
+    var userInput = Console.ReadLine();
+    if (userInput == "yes")
     {
-        Console.Write("You enter the cave. It's terribly dark. Do you light a torch?");
-        var userInput = Console.ReadLine();
-        if (userInput == "yes")
-        {
-            A3O1();
-        }
-        else
-        {
-            Console.WriteLine("You decide to save your torch for the time being. You can still see in a short vicinity and barely make out a path to follow");
-        }
+        A3O1();
     }
+    else
+    {
+        Console.WriteLine("You decide to save your torch for the time being. You can still see in a short vicinity and barely make out a path to follow");
+    }
+}
 
 void A3O1()
 {
@@ -60,7 +57,7 @@ static void FirstEncounter()
     var userInput = Console.ReadLine();
     if (userInput == "attack")
     {
-       Attack();
+        Attack();
     }
     else if (userInput == "defend")
     {
@@ -75,7 +72,6 @@ static void FirstEncounter()
 
 static void Attack()
 {
-    int playerDamage = 1; 
     Console.WriteLine("You attack the creature. It did: " + Player.Damage + " damage!");
     Console.WriteLine("The creature hits back. It did: " + Monster.Damage + " damage!");
     Monster.Health--;
