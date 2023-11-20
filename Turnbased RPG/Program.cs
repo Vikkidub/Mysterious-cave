@@ -1,7 +1,5 @@
 ﻿using Turnbased_RPG;
 
-var enemy = new Monster { };
-
 Console.WriteLine("Answer questions with 'yes' or 'no'. Exceptions are marked like 'this'");
 Console.WriteLine("Health:"+Player.Health+" Potions:"+Player.Potions+" Attack:"+Player.Damage+" Torches:"+Player.Torches);
 Console.WriteLine();
@@ -88,11 +86,6 @@ static void Defend()
     Monster.Health--;
     Player.Potions--;
 }
-
-
-
-
-
 
 
 Console.ReadLine();
