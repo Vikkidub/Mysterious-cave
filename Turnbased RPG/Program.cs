@@ -1,7 +1,7 @@
 ﻿using Turnbased_RPG;
 
 Console.WriteLine("Answer questions with 'yes' or 'no'. Exceptions are marked like 'this'");
-Console.WriteLine("Health:"+Player.Health+" Potions:"+Player.Potions+" Attack:"+Player.Damage+" Torches:"+Player.Torches);
+Console.WriteLine($"Health: {Player.Health} Potions: {Player.Potions} Attack: {Player.Damage} Torches: {Player.Torches}");
 Console.WriteLine();
 
 A1();
