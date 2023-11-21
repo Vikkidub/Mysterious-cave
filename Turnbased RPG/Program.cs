@@ -1,8 +1,13 @@
 ﻿using Turnbased_RPG;
 
-Console.WriteLine("Answer questions with 'yes' or 'no'. Exceptions are marked like 'this'");
-Console.WriteLine($"Health: {Player.Health} Potions: {Player.Potions} Attack: {Player.Damage} Torches: {Player.Torches}");
+Console.WriteLine("Answer questions with 'yes' or 'no'. Exceptions are marked with ''. Try 'stats'");
 Console.WriteLine();
+
+var userInput = Console.ReadLine();
+void Stats()
+{
+    Console.WriteLine($"Health: {Player.Health} Potions: {Player.Potions} Attack: {Player.Damage} Torches: {Player.Torches}");
+}
 
 A1();
 void A1()
@@ -47,6 +52,7 @@ void A2()
     if (userInput == "yes")
     {
         Player.Torches--;
+        Console.WriteLine($"Remaining torches: {Player.Torches}");
         A3O1();
     }
     else
@@ -68,16 +74,21 @@ void A3O1()
 
 static void FirstEncounter()
 {
+    Gamestate();
     Console.WriteLine("Monster health: " + Monster.Health);
     Console.WriteLine("'Attack'" + "'defend'");
     var userInput = Console.ReadLine();
-    if (userInput == "attack")
+    if (userInput == "attack" && Monster.Health > 0)
     {
         Attack();
     }
     else if (userInput == "defend")
     {
         Defend();
+    }
+    else if (Monster.Health < 1)
+    {
+        A4();
     }
     else
     {
@@ -89,8 +100,8 @@ static void Attack()
 {
     Console.WriteLine("You attack the creature. It did: " + Player.Damage + " damage!");
     Console.WriteLine("The creature hits back. It did: " + Monster.Damage + " damage!");
-    Monster.Health--;
-    Player.Health--;
+    Monster.Health -= Player.Damage;
+    Player.Health -= Monster.Damage;
 }
 static void Defend()
 {
@@ -99,7 +110,24 @@ static void Defend()
     Monster.Health--;
     Player.Potions--;
 }
+static void Gamestate()
+{
+    if (Player.Health < 1)
+    {
+        Console.WriteLine("You died. THE END");
+    }
+}
 
+static void A4()
+{
+    Console.WriteLine("The creature has drawn its last breath and you let out a sigh of relief. You notice the creature is wearing a collar.");
+    if (Player.Torches == 0)
+    {
+        Console.WriteLine("Your torch has dwindled. Use the fallen creatures claws to make a reinforced club?");
+    }
+    else {Console.WriteLine("This is not the time for that!");}
+    FirstEncounter();
+}
 
 Console.ReadLine();
 
