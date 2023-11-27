@@ -100,7 +100,7 @@ void A3O1()
     }
     else if (userInput == "hide")
     {
-        Console.WriteLine("This path is not functional yet");
+        Console.WriteLine("** This path is not functional yet **");
         A3O1();
     }
     else if (userInput == "stats")
@@ -114,39 +114,44 @@ void A3O1()
             A3O1();
         }
     }
-
-
- void FirstEncounter()
+void FirstEncounter()
 {
-    Console.WriteLine("Monster health: " + monster.Health);
-    Console.WriteLine("'attack'" + "'defend'");
-    var userInput = Console.ReadLine();
     if (monster.Health < 1)
     {
         A4();
     }
-   else if (userInput == "attack")
-    {
-        Attack();
-        FirstEncounter();
-    }
-    else if (userInput == "defend")
-    {
-        Defend();
-        FirstEncounter();
-    }
-    else if (userInput == "stats")
-    {
-        Stats();
-        FirstEncounter();
-    }
     else
     {
-        Console.WriteLine("This is not the time for that!");
-        FirstEncounter();
+        Combat();
     }
+    }
+void Combat(){
+ Console.WriteLine("Monster health: " + monster.Health);
+        Console.WriteLine("'attack'" + "'defend'");
+        var userInput = Console.ReadLine();
+
+        if (userInput == "attack")
+        {
+            Attack();
+            FirstEncounter();
+        }
+        else if (userInput == "defend")
+        {
+            Defend();
+            FirstEncounter();
+        }
+        else if (userInput == "stats")
+        {
+            Stats();
+            FirstEncounter();
+        }
+        else
+        {
+            Console.WriteLine("This is not the time for that!");
+            FirstEncounter();
+        }
 }
- void Attack()
+void Attack()
 {
     Console.WriteLine("You attack the creature. It did: " + player.Damage + " damage!");
     Console.WriteLine("The creature hits back. It did: " + monster.Damage + " damage!");
@@ -171,6 +176,8 @@ void A3O1()
 
 void A4()
 {
+    Console.WriteLine("You have won the battle. Press a button to continue");
+    Console.ReadLine();
     Console.WriteLine("The creature has drawn its last breath and you let out a sigh of relief. You notice the creature is wearing a collar.");
     if (player.Torches == 0)
     {
@@ -183,5 +190,8 @@ void A4()
     }
 }
 
+Console.WriteLine();
+Console.ForegroundColor = ConsoleColor.White;
+Console.WriteLine("** To be continued. Thanks for playing! **");
 Console.ReadLine();
 
