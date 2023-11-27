@@ -2,8 +2,6 @@
 
 Console.WriteLine("Answer questions with 'yes' or 'no'. Exceptions are marked with ''. Try 'stats'");
 Console.WriteLine();
-
-var userInput = Console.ReadLine();
 void Stats()
 {
     Console.WriteLine($"Health: {Player.Health} Potions: {Player.Potions} Attack: {Player.Damage} Torches: {Player.Torches}");
@@ -13,16 +11,25 @@ A1();
 void A1()
 {
     Console.WriteLine("You are an explorer in a distant land. You discover a mysterious cave. Do you enter?");
-
     var userInput = Console.ReadLine();
 
     if (userInput == "yes")
     {
         A2();
     }
-    else 
+    else if (userInput == "no")
     {
         A1O2();
+    }
+    else if (userInput == "stats")
+    {
+        Stats();
+        A1();
+    }
+    else
+    {
+        Console.WriteLine("This is not the time for that!");
+        A1();
     }
 }
  void A1O2()
@@ -39,25 +46,41 @@ void A1()
         {
             Console.WriteLine("Unfortunately the storm was too owerpowering and you never made it back home. THE END");
         }
-        else
-        {
-            Console.WriteLine("This is not the time for that!");
-            A1O2();
-        }
+    else if (userInput == "stats")
+    {
+        Stats();
+        A1O2();
     }
+    else
+    {
+        Console.WriteLine("This is not the time for that!");
+        A1O2();
+    }
+}
 void A2()
 {
-    Console.Write("You enter the cave. It's terribly dark. Do you light a torch?");
+    Console.WriteLine("You enter the cave. It's terribly dark. Do you light a torch?");
     var userInput = Console.ReadLine();
+
     if (userInput == "yes")
     {
         Player.Torches--;
         Console.WriteLine($"Remaining torches: {Player.Torches}");
         A3O1();
     }
-    else
+    else if (userInput == "no")
     {
         Console.WriteLine("You decide to save your torch for the time being. You can still see in a short vicinity and barely make out a path to follow");
+    }
+    else if (userInput == "stats")
+    {
+        Stats();
+        A2();
+    }
+    else
+    {
+        Console.WriteLine("This is not the time for that!");
+        A2();
     }
 }
 void A3O1()
@@ -70,13 +93,28 @@ void A3O1()
         Console.ReadKey();
         FirstEncounter();
     }
-}
+    else if (userInput == "hide")
+    {
+
+    }
+    else if (userInput == "stats")
+        {
+            Stats();
+            A3O1();
+        }
+        else
+        {
+            Console.WriteLine("This is not the time for that!");
+            A3O1();
+        }
+    }
+
 
 static void FirstEncounter()
 {
     Gamestate();
     Console.WriteLine("Monster health: " + Monster.Health);
-    Console.WriteLine("'Attack'" + "'defend'");
+    Console.WriteLine("'attack'" + "'defend'");
     var userInput = Console.ReadLine();
     if (userInput == "attack" && Monster.Health > 0)
     {
@@ -102,6 +140,7 @@ static void Attack()
     Console.WriteLine("The creature hits back. It did: " + Monster.Damage + " damage!");
     Monster.Health -= Player.Damage;
     Player.Health -= Monster.Damage;
+    Gamestate();
 }
 static void Defend()
 {
@@ -126,7 +165,7 @@ static void A4()
         Console.WriteLine("Your torch has dwindled. Use the fallen creatures claws to make a reinforced club?");
     }
     else {Console.WriteLine("This is not the time for that!");}
-    FirstEncounter();
+    A4();
 }
 
 Console.ReadLine();
