@@ -68,7 +68,9 @@ void A2()
     if (userInput == "yes")
     {
         player.Torches--;
+        
         Console.WriteLine($"Remaining torches: {player.Torches}");
+        Console.ForegroundColor = ConsoleColor.DarkYellow;
         A3O1();
     }
     else if (userInput == "no")
@@ -118,17 +120,19 @@ void A3O1()
     Console.WriteLine("Monster health: " + monster.Health);
     Console.WriteLine("'attack'" + "'defend'");
     var userInput = Console.ReadLine();
-    if (userInput == "attack" && monster.Health > 0)
+    if (monster.Health < 1)
+    {
+        A4();
+    }
+   else if (userInput == "attack")
     {
         Attack();
+        FirstEncounter();
     }
     else if (userInput == "defend")
     {
         Defend();
-    }
-    else if (monster.Health < 1)
-    {
-        A4();
+        FirstEncounter();
     }
     else if (userInput == "stats")
     {
@@ -147,7 +151,7 @@ void A3O1()
     Console.WriteLine("The creature hits back. It did: " + monster.Damage + " damage!");
     monster.Health -= player.Damage;
     player.Health -= monster.Damage;
-    Gamestate();
+    FailState();
 }
  void Defend()
 {
@@ -156,7 +160,7 @@ void A3O1()
     monster.Health--;
     player.Potions--;
 }
- void Gamestate()
+ void FailState()
 {
     if (player.Health < 1)
     {
@@ -169,10 +173,13 @@ void A4()
     Console.WriteLine("The creature has drawn its last breath and you let out a sigh of relief. You notice the creature is wearing a collar.");
     if (player.Torches == 0)
     {
+        Console.ForegroundColor = ConsoleColor.Gray;
         Console.WriteLine("Your torch has dwindled. Use the fallen creatures claws to make a reinforced club?");
     }
-    else {Console.WriteLine("This is not the time for that!");}
-    A4();
+    else
+    {
+        Console.WriteLine("You wonder if this might be a good time to use the torch you saved earlier");
+    }
 }
 
 Console.ReadLine();
