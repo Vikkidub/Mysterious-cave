@@ -9,7 +9,7 @@ namespace Turnbased_RPG
 {
      class Monster
     {
-      public static int Health = 3; 
-      public static int Damage = 1;
+      public int Health = 3; 
+      public int Damage = 1;
     }
 }

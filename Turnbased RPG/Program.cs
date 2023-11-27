@@ -1,10 +1,13 @@
 ﻿using Turnbased_RPG;
 
+var player = new Player();
+var monster = new Monster();
+
 Console.WriteLine("Answer questions with 'yes' or 'no'. Exceptions are marked with ''. Try 'stats'");
 Console.WriteLine();
 void Stats()
 {
-    Console.WriteLine($"Health: {Player.Health} Potions: {Player.Potions} Attack: {Player.Damage} Torches: {Player.Torches}");
+    Console.WriteLine($"Health: {player.Health} Potions: {player.Potions} Attack: {player.Damage} Torches: {player.Torches}");
 }
 
 A1();
@@ -64,8 +67,8 @@ void A2()
 
     if (userInput == "yes")
     {
-        Player.Torches--;
-        Console.WriteLine($"Remaining torches: {Player.Torches}");
+        player.Torches--;
+        Console.WriteLine($"Remaining torches: {player.Torches}");
         A3O1();
     }
     else if (userInput == "no")
@@ -110,13 +113,12 @@ void A3O1()
     }
 
 
-static void FirstEncounter()
+ void FirstEncounter()
 {
-    Gamestate();
-    Console.WriteLine("Monster health: " + Monster.Health);
+    Console.WriteLine("Monster health: " + monster.Health);
     Console.WriteLine("'attack'" + "'defend'");
     var userInput = Console.ReadLine();
-    if (userInput == "attack" && Monster.Health > 0)
+    if (userInput == "attack" && monster.Health > 0)
     {
         Attack();
     }
@@ -124,9 +126,14 @@ static void FirstEncounter()
     {
         Defend();
     }
-    else if (Monster.Health < 1)
+    else if (monster.Health < 1)
     {
         A4();
+    }
+    else if (userInput == "stats")
+    {
+        Stats();
+        FirstEncounter();
     }
     else
     {
@@ -134,33 +141,33 @@ static void FirstEncounter()
         FirstEncounter();
     }
 }
-static void Attack()
+ void Attack()
 {
-    Console.WriteLine("You attack the creature. It did: " + Player.Damage + " damage!");
-    Console.WriteLine("The creature hits back. It did: " + Monster.Damage + " damage!");
-    Monster.Health -= Player.Damage;
-    Player.Health -= Monster.Damage;
+    Console.WriteLine("You attack the creature. It did: " + player.Damage + " damage!");
+    Console.WriteLine("The creature hits back. It did: " + monster.Damage + " damage!");
+    monster.Health -= player.Damage;
+    player.Health -= monster.Damage;
     Gamestate();
 }
-static void Defend()
+ void Defend()
 {
     Console.WriteLine("You take a sip of your trusty canteen and evade an incoming blow!");
     Console.WriteLine("The monster is so suprised by the maneuver that it falls on its face");
-    Monster.Health--;
-    Player.Potions--;
+    monster.Health--;
+    player.Potions--;
 }
-static void Gamestate()
+ void Gamestate()
 {
-    if (Player.Health < 1)
+    if (player.Health < 1)
     {
         Console.WriteLine("You died. THE END");
     }
 }
 
-static void A4()
+void A4()
 {
     Console.WriteLine("The creature has drawn its last breath and you let out a sigh of relief. You notice the creature is wearing a collar.");
-    if (Player.Torches == 0)
+    if (player.Torches == 0)
     {
         Console.WriteLine("Your torch has dwindled. Use the fallen creatures claws to make a reinforced club?");
     }

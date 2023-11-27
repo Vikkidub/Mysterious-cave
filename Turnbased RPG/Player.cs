@@ -8,9 +8,9 @@ namespace Turnbased_RPG
 {
     internal class Player
     {
-        public static int Health = 3;
-        public static int Damage = 1;
-        public static int Potions = 2;
-        public static int Torches = 1;
+        public int Health = 3;
+        public int Damage = 1;
+        public int Potions = 2;
+        public int Torches = 1;
     }
 }
