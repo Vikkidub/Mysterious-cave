@@ -100,7 +100,8 @@ void A3O1()
     }
     else if (userInput == "hide")
     {
-
+        Console.WriteLine("This path is not functional yet");
+        A3O1();
     }
     else if (userInput == "stats")
         {
