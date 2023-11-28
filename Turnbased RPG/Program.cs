@@ -166,10 +166,18 @@ void Attack()
 }
  void Defend()
 {
-    Console.WriteLine("You take a sip of your trusty canteen and evade an incoming blow!");
-    Console.WriteLine("The monster is so suprised by the maneuver that it falls on its face");
-    monster.Health--;
-    player.Potions--;
+    if (player.Potions < 1)
+    {
+        Console.WriteLine($"Your potions are: {player.Potions}. You are going to need to find more!");
+    }
+    else
+    {
+         Console.WriteLine("You take a sip of your trusty canteen and evade an incoming blow!");
+         Console.WriteLine("The monster is so suprised by the maneuver that it falls on its face");
+         monster.Health--;
+         player.Potions--;
+         player.Health++;
+    }
 }
 
 void A4()
