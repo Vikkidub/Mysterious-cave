@@ -163,7 +163,6 @@ void Attack()
     Console.WriteLine("The creature hits back. It did: " + monster.Damage + " damage!");
     monster.Health -= player.Damage;
     player.Health -= monster.Damage;
-   // FailState();
 }
  void Defend()
 {
@@ -172,13 +171,6 @@ void Attack()
     monster.Health--;
     player.Potions--;
 }
-/* void FailState()
-{
-    if (player.Health < 1)
-    {
-        Console.WriteLine("You died. THE END");
-    }
-} */
 
 void A4()
 {
