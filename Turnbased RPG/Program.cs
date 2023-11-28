@@ -118,7 +118,11 @@ void A3O1()
     }
 void FirstEncounter()
 {
-    if (monster.Health < 1)
+    if (player.Health < 1)
+    {
+        Console.WriteLine("You died. THE END");
+    }
+    else if (monster.Health < 1)
     {
         A4();
     }
@@ -150,7 +154,7 @@ void Combat(){
         else
         {
             Console.WriteLine("This is not the time for that!");
-            FirstEncounter();
+            Combat();
         }
 }
 void Attack()
@@ -159,7 +163,7 @@ void Attack()
     Console.WriteLine("The creature hits back. It did: " + monster.Damage + " damage!");
     monster.Health -= player.Damage;
     player.Health -= monster.Damage;
-    FailState();
+   // FailState();
 }
  void Defend()
 {
@@ -168,13 +172,13 @@ void Attack()
     monster.Health--;
     player.Potions--;
 }
- void FailState()
+/* void FailState()
 {
     if (player.Health < 1)
     {
         Console.WriteLine("You died. THE END");
     }
-}
+} */
 
 void A4()
 {
