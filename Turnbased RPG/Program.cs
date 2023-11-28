@@ -76,6 +76,8 @@ void A2()
     else if (userInput == "no")
     {
         Console.WriteLine("You decide to save your torch for the time being. You can still see in a short vicinity and barely make out a path to follow");
+        Console.WriteLine("** This path is not functional yet **");
+        A2();
     }
     else if (userInput == "stats")
     {
