@@ -12,7 +12,7 @@ namespace Turnbased_RPG
         public void Run()
         {
             var player = new Player();
-            var monster = new Monster();
+            var monster = new Monster(3,1);
 
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Answer questions with 'yes' or 'no'. Exceptions are marked with ''. Try 'stats'");
