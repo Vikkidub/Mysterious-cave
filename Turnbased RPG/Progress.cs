@@ -135,7 +135,7 @@ namespace Turnbased_RPG
             {
                 if (player.Health < 1)
                 {
-                    Console.WriteLine("You died. Press a button to try again");
+                    Console.WriteLine("YOU DIED. Press a button to try again");
                     Console.ReadLine();
                     Run();
                 }
