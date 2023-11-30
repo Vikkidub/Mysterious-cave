@@ -12,5 +12,10 @@ namespace Turnbased_RPG
         public int Damage = 1;
         public int Potions = 2;
         public int Torches = 1;
+
+       public void ShowStats()
+        {
+            Console.WriteLine($"Health: {Health} Potions: {Potions} Attack: {Damage} Torches: {Torches}");
+        }
     }
 }

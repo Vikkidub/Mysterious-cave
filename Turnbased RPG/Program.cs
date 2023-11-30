@@ -5,10 +5,6 @@ var monster = new Monster();
 
 Console.WriteLine("Answer questions with 'yes' or 'no'. Exceptions are marked with ''. Try 'stats'");
 Console.WriteLine();
-void Stats()
-{
-    Console.WriteLine($"Health: {player.Health} Potions: {player.Potions} Attack: {player.Damage} Torches: {player.Torches}");
-}
 
 A1();
 void A1()
@@ -26,7 +22,7 @@ void A1()
     }
     else if (userInput == "stats")
     {
-        Stats();
+        player.ShowStats();
         A1();
     }
     else
@@ -51,7 +47,7 @@ void A1()
         }
     else if (userInput == "stats")
     {
-        Stats();
+        player.ShowStats();
         A1O2();
     }
     else
@@ -81,7 +77,7 @@ void A2()
     }
     else if (userInput == "stats")
     {
-        Stats();
+        player.ShowStats();
         A2();
     }
     else
@@ -107,7 +103,7 @@ void A3O1()
     }
     else if (userInput == "stats")
         {
-            Stats();
+            player.ShowStats();
             A3O1();
         }
         else
@@ -148,7 +144,7 @@ void Combat(){
         }
         else if (userInput == "stats")
         {
-            Stats();
+            player.ShowStats();
             FirstEncounter();
         }
         else
