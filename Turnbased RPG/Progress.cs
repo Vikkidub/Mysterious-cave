@@ -81,6 +81,7 @@ namespace Turnbased_RPG
                     Console.WriteLine($"Remaining torches: {player.Torches}");
                     activeTorch = true;
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.WriteLine("You light a torch and can now see clearly, but the light has drawn the attention of some creature coming your way.");
                     A3O1();
                 }
                 else if (userInput == "no")
@@ -241,7 +242,8 @@ namespace Turnbased_RPG
                         }
                         else if (userInput == "yes")
                         {
-                            activeTorch = true; 
+                            activeTorch = true;
+                            player.Torches--;
                             Console.ForegroundColor = ConsoleColor.DarkYellow;
                             Console.WriteLine("You light a torch");
                             Console.WriteLine($"Remaining torches: {player.Torches}");
