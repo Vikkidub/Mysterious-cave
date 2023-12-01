@@ -80,6 +80,7 @@ namespace Turnbased_RPG
                     player.Torches--;
                     Console.WriteLine($"Remaining torches: {player.Torches}");
                     activeTorch = true;
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
                     A3O1();
                 }
                 else if (userInput == "no")
