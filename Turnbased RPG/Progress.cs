@@ -13,15 +13,15 @@ namespace Turnbased_RPG
         {
             var player = new Player();
             var monster = new Monster(3,1);
+            bool activeTorch = false;
 
-            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Answer questions with 'yes' or 'no'. Exceptions are marked with ''. Try 'stats'");
             Console.WriteLine();
+
             A1();
             void A1()
             {
-                Console.WriteLine(
-                    "You are an explorer in a distant land. You discover a mysterious cave. Do you enter?");
+                Console.WriteLine("You are an explorer in a distant land. You discover a mysterious cave. Do you enter?");
                 var userInput = Console.ReadLine();
 
                 if (userInput == "yes")
@@ -56,8 +56,7 @@ namespace Turnbased_RPG
                 }
                 else if (userInput == "no" || userInput == "storm")
                 {
-                    Console.WriteLine(
-                        "Unfortunately the storm was too owerpowering and you never made it back home. THE END");
+                    Console.WriteLine("Unfortunately the storm was too owerpowering and you never made it back home. THE END");
                 }
                 else if (userInput == "stats")
                 {
@@ -79,17 +78,14 @@ namespace Turnbased_RPG
                 if (userInput == "yes")
                 {
                     player.Torches--;
-
                     Console.WriteLine($"Remaining torches: {player.Torches}");
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    activeTorch = true;
                     A3O1();
                 }
                 else if (userInput == "no")
                 {
-                    Console.WriteLine(
-                        "You decide to save your torch for the time being. You can still see in a short vicinity and barely make out a path to follow");
-                    Console.WriteLine("** This path is not functional yet **");
-                    A2();
+                    Console.WriteLine("You decide to save your torch for the time being. You walk deeper into the darkness as you hear strange noises nearby");
+                    A3O1();
                 }
                 else if (userInput == "stats")
                 {
@@ -105,8 +101,7 @@ namespace Turnbased_RPG
 
             void A3O1()
             {
-                Console.WriteLine(
-                    "You light a torch and can now see clearly, but the light has drawn the attention of some creature coming your way. Will you 'fight' or attempt to 'hide'");
+                Console.WriteLine("Will you 'fight' or attempt to 'hide'?");
                 var userInput = Console.ReadLine();
                 if (userInput == "yes" || userInput == "fight")
                 {
@@ -116,8 +111,7 @@ namespace Turnbased_RPG
                 }
                 else if (userInput == "hide")
                 {
-                    Console.WriteLine("** This path is not functional yet **");
-                    A3O1();
+                    HideEncounter();
                 }
                 else if (userInput == "stats")
                 {
@@ -128,6 +122,24 @@ namespace Turnbased_RPG
                 {
                     Console.WriteLine("This is not the time for that!");
                     A3O1();
+                }
+            }
+
+            void HideEncounter()
+            {
+                if (activeTorch)
+                {
+                    Console.WriteLine("You attempt to hide behind a crevice on the wall, but the light from your torch gave your position away.");
+                    player.Health--;
+                    Console.WriteLine($"The creature attacks while you are still preparing to fight. Health: {player.Health}");
+                    FirstEncounter();
+                }
+                else
+                {
+                    Console.WriteLine("Though it's hard to see you can hear their footsteps and snarls nearby.");
+                    Console.WriteLine("You sneak attack the creature. It did: " + player.Damage + " damage!");
+                    monster.Health -= player.Damage;
+                    FirstEncounter();
                 }
             }
 
@@ -151,7 +163,6 @@ namespace Turnbased_RPG
 
             void CombatSequence()
             {
-                var progress = new Progress();
                 Console.WriteLine("Monster health: " + monster.Health);
                 Console.WriteLine("'attack'" + "'defend'");
                 var userInput = Console.ReadLine();
@@ -204,20 +215,51 @@ namespace Turnbased_RPG
 
             void A4()
             {
-                Console.WriteLine("You have won the battle. Press a button to continue");
-                Console.ReadLine();
-                Console.WriteLine(
-                    "The creature has drawn its last breath and you let out a sigh of relief. You notice the creature is wearing a collar.");
-                if (player.Torches == 0)
-                {
+                    Console.WriteLine("You have won the battle. Press a button to continue");
+                    Console.ReadLine();
+                    Console.WriteLine("The creature has drawn its last breath and you let out a sigh of relief.");
                     Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.WriteLine(
-                        "Your torch has dwindled. Use the fallen creatures claws to make a reinforced club?");
-                }
-                else
-                {
-                    Console.WriteLine("You wonder if this might be a good time to use the torch you saved earlier");
-                }
+
+                    if (activeTorch)
+                    {   
+                        activeTorch = false; 
+                        Console.WriteLine("Your torch has dwindled. Use the fallen creatures claws to make a reinforced club?");
+                    }
+                    else
+                    {
+                        LightTorch();
+                    }
+
+                    void LightTorch()
+                    {
+                        Console.WriteLine("Light a torch?");
+                        var userInput = Console.ReadLine();
+                        if (player.Torches < 1)
+                        {
+                            Console.WriteLine($"You have: {player.Torches} Torches remaining");
+                        }
+                        else if (userInput == "yes")
+                        {
+                            activeTorch = true; 
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
+                            Console.WriteLine("You light a torch");
+                            Console.WriteLine($"Remaining torches: {player.Torches}");
+                        }
+                        else if (userInput == "no")
+                        {
+                            Console.WriteLine("You decide not to light a torch");
+                        }
+                        else if (userInput == "stats")
+                        {
+                            player.ShowStats();
+                            LightTorch();
+                        }
+                        else
+                        {
+                             Console.WriteLine("This is not the time for that!");
+                             LightTorch();
+                        }
+                    }
             }
         }
       public void GameOver()
