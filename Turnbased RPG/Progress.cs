@@ -132,8 +132,9 @@ namespace Turnbased_RPG
                 if (activeTorch)
                 {
                     Console.WriteLine("You attempt to hide behind a crevice on the wall, but the light from your torch gave your position away.");
-                    player.Health--;
-                    Console.WriteLine($"The creature attacks while you are still preparing to fight. Health: {player.Health}");
+                    player.Health -= monster.Damage;
+                    Console.WriteLine($"The creature attacks while you are still preparing to fight. It did: " + monster.Damage + " damage!");
+                  //  Console.WriteLine("Health remaining: " + player.Health);
                     FirstEncounter();
                 }
                 else
@@ -165,7 +166,7 @@ namespace Turnbased_RPG
 
             void CombatSequence()
             {
-                Console.WriteLine("Monster health: " + monster.Health);
+                Console.WriteLine($"Health: {player.Health}. Monster health: {monster.Health}");
                 Console.WriteLine("'attack'" + "'defend'");
                 var userInput = Console.ReadLine();
 
@@ -225,7 +226,8 @@ namespace Turnbased_RPG
                     if (activeTorch)
                     {   
                         activeTorch = false; 
-                        Console.WriteLine("Your torch has dwindled. Use the fallen creatures claws to make a reinforced club?");
+                        Console.WriteLine("Your torch has dwindled. In the final glimmers you get a good look at the creature.");
+                        Console.WriteLine("It looks like a shark with the legs of a man. Craft a Reinforced Club of the Inverse Merman?");
                     }
                     else
                     {
