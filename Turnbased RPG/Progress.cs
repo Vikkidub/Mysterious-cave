@@ -247,11 +247,12 @@ namespace Turnbased_RPG
                         Console.WriteLine("This is not the time for that!");
                         A4();
                         }
-                    } else
-                {
+                    } 
+                    else
+                    {
                     LightTorch();
                     A5();
-                }
+                    }
                                                         
                     void LightTorch()
                     {
