@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -227,13 +228,31 @@ namespace Turnbased_RPG
                     {   
                         activeTorch = false; 
                         Console.WriteLine("Your torch has dwindled. In the final glimmers you get a good look at the creature.");
-                        Console.WriteLine("It looks like a shark with the legs of a man. Craft a Reinforced Club of the Inverse Merman?");
-                    }
-                    else
-                    {
-                        LightTorch();
-                    }
-
+                        Console.WriteLine("It looks like a shark with the legs of a man. It wears a neclace decorated with teeth");
+                        Console.WriteLine("Obtained Charred wooden stick & Shark teeth neclace. Attempt crafting?");
+                        var input = Console.ReadLine();
+                        if (input == "yes")
+                        {
+                         Console.WriteLine("Crafted: Reinforced Club of the Inverse Merman! ");
+                        player.Damage++;
+                        A5();
+                        }
+                        else if (input == "no")
+                        {
+                        Console.WriteLine("You decide to hang on to your items for the time being.");
+                        A5();
+                        }
+                        else
+                        {
+                        Console.WriteLine("This is not the time for that!");
+                        A4();
+                        }
+                    } else
+                {
+                    LightTorch();
+                    A5();
+                }
+                                                        
                     void LightTorch()
                     {
                         Console.WriteLine("Light a torch?");
@@ -264,6 +283,12 @@ namespace Turnbased_RPG
                              Console.WriteLine("This is not the time for that!");
                              LightTorch();
                         }
+                    }
+
+                    void A5()
+                    {
+                        Console.WriteLine("You venture deeper into the cave and find yourself at a crossroads.");
+                        Console.WriteLine("The 'left' path is covered in moss and moisture. The 'right' path is covered in boulders though you feel a gentle breeze");
                     }
             }
         }
