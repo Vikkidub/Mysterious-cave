@@ -229,7 +229,7 @@ namespace Turnbased_RPG
                         activeTorch = false; 
                         Console.WriteLine("Your torch has dwindled. In the final glimmers you get a good look at the creature.");
                         Console.WriteLine("It looks like a shark with the legs of a man. It wears a neclace decorated with teeth");
-                        Console.WriteLine("Obtained Charred wooden stick & Shark teeth neclace. Attempt crafting?");
+                        Console.WriteLine("Obtained Charred wooden stick & Shark teeth necklace. Attempt crafting?");
                         var input = Console.ReadLine();
                         if (input == "yes")
                         {
