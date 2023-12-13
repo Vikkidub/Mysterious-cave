@@ -16,7 +16,7 @@ namespace Turnbased_RPG
             var player = new Player();
             List<String> items = new List<String>();
             bool activeTorch = false;
-            var monster = new Monster(3,1);
+            var monster = new Monster();
             bool combat = false;
 
             Console.WriteLine("Answer questions with 'yes' or 'no'. Exceptions are marked with ''. Try 'stats' or 'items'");
