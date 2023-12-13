@@ -56,7 +56,7 @@ namespace Turnbased_RPG
             {
                 while (items.Count == 0 && combat == false) 
                 { Console.WriteLine("You rummage through your rucksack, inside you see some crumbs and a nervous looking mouse");
-                  Console.WriteLine("The rascal appears to have eaten the last of your rations. It makes no effort to escape. Let it stay?");
+                  Console.WriteLine("The rascal appears to have feasted on your rations. It makes no effort to escape. Let it stay?");
                     var input = Console.ReadLine();
                     if (input == "yes") { items.Add("Mysterious mouse"); Console.WriteLine("You decide to let it stay. You leave a small opening in the rucksack"); }
                     else if (input == "no")
