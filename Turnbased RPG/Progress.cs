@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -13,10 +14,12 @@ namespace Turnbased_RPG
         public void Run()
         {
             var player = new Player();
-            var monster = new Monster(3,1);
+            List<String> items = new List<String>();
             bool activeTorch = false;
+            var monster = new Monster(3,1);
+            bool combat = false;
 
-            Console.WriteLine("Answer questions with 'yes' or 'no'. Exceptions are marked with ''. Try 'stats'");
+            Console.WriteLine("Answer questions with 'yes' or 'no'. Exceptions are marked with ''. Try 'stats' or 'items'");
             Console.WriteLine();
 
             A1();
@@ -38,10 +41,45 @@ namespace Turnbased_RPG
                     player.ShowStats();
                     A1();
                 }
+                else if (userInput == "items")
+                {
+                    ShowItems();
+                    A1();
+                }
                 else
                 {
                     Console.WriteLine("This is not the time for that!");
                     A1();
+                }
+            }
+            void ShowItems()
+            {
+                while (items.Count == 0 && combat == false) 
+                { Console.WriteLine("You rummage through your rucksack, inside you see some crumbs and a nervous looking mouse");
+                  Console.WriteLine("The rascal appears to have eaten the last of your rations. It makes no effort to escape. Let it stay?");
+                    var input = Console.ReadLine();
+                    if (input == "yes") { items.Add("Mysterious mouse"); Console.WriteLine("You decide to let it stay. You leave a small opening in the rucksack"); }
+                    else if (input == "no")
+                    {
+                        items.Add("Crumbs");
+                        Console.WriteLine("You kindly tell the mouse to leave and it reluctantly adheres to your request.");
+                    }
+                    else if (input == "sing")
+                    {
+                        Console.WriteLine("You hum a gentle lullaby and the mouse gratefully goes to sleep. The feeling of not being alone invigorates you");
+                        player.Health++;
+                        Console.WriteLine("Health: +1. Current health: " + player.Health);
+                    }
+                    else
+                    {
+                        Console.WriteLine("This is not the time for that!");
+                        ShowItems();
+                    }   break; 
+                }
+                
+                for (int i = 0; i < items.Count; i++)
+                {
+                    Console.WriteLine(items[i]);
                 }
             }
 
@@ -62,6 +100,11 @@ namespace Turnbased_RPG
                 else if (userInput == "stats")
                 {
                     player.ShowStats();
+                    A1O2();
+                }
+                else if (userInput == "items")
+                {
+                    ShowItems();
                     A1O2();
                 }
                 else
@@ -95,6 +138,11 @@ namespace Turnbased_RPG
                     player.ShowStats();
                     A2();
                 }
+                else if (userInput == "items")
+                {
+                    ShowItems();
+                    A2();
+                }
                 else
                 {
                     Console.WriteLine("This is not the time for that!");
@@ -110,6 +158,7 @@ namespace Turnbased_RPG
                 {
                     Console.WriteLine("You prepare to fight. Press a button when ready");
                     Console.ReadKey();
+                    combat = true;
                     FirstEncounter();
                 }
                 else if (userInput == "hide")
@@ -119,6 +168,11 @@ namespace Turnbased_RPG
                 else if (userInput == "stats")
                 {
                     player.ShowStats();
+                    A3O1();
+                }
+                else if (userInput == "items")
+                {
+                    ShowItems();
                     A3O1();
                 }
                 else
@@ -145,6 +199,7 @@ namespace Turnbased_RPG
                     monster.Health -= player.Damage;
                     FirstEncounter();
                 }
+                combat = true;
             }
 
             void FirstEncounter()
@@ -157,6 +212,7 @@ namespace Turnbased_RPG
                 }
                 else if (monster.Health < 1)
                 {
+                    combat = false;
                     A4();
                 }
                 else
@@ -184,6 +240,11 @@ namespace Turnbased_RPG
                 else if (userInput == "stats")
                 {
                     player.ShowStats();
+                    FirstEncounter();
+                }
+                else if (userInput == "items")
+                {
+                    ShowItems();
                     FirstEncounter();
                 }
                 else
@@ -229,11 +290,16 @@ namespace Turnbased_RPG
                         activeTorch = false; 
                         Console.WriteLine("Your torch has dwindled. In the final glimmers you get a good look at the creature.");
                         Console.WriteLine("It looks like a shark with the legs of a man. It wears a neclace decorated with teeth");
+                        items.Add("Charred wooden stick");
+                        items.Add("Sharkteeth necklace");
                         Console.WriteLine("Obtained Charred wooden stick & Shark teeth necklace. Attempt crafting?");
                         var input = Console.ReadLine();
                         if (input == "yes")
                         {
-                         Console.WriteLine("Crafted: Reinforced Club of the Inverse Merman! ");
+                        items.Remove("Charred wooden stick");
+                        items.Remove("Sharkteeth necklace");
+                        items.Add("Reinforced Club of the Inverse Merman");
+                        Console.WriteLine("Crafted: Reinforced Club of the Inverse Merman!");
                         player.Damage++;
                         A5();
                         }
@@ -277,6 +343,11 @@ namespace Turnbased_RPG
                         else if (userInput == "stats")
                         {
                             player.ShowStats();
+                            LightTorch();
+                        }
+                        else if (userInput == "items")
+                        {
+                            ShowItems();
                             LightTorch();
                         }
                         else

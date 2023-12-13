@@ -12,7 +12,7 @@ namespace Turnbased_RPG
          public int Health;
          public int Damage;
 
-      public Monster(int health, int damage)
+      public Monster(int health = 3, int damage = 1)
       {
           Health = health;
           Damage = damage;
